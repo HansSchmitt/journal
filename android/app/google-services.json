@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "358070856390",
+    "firebase_url": "https://journal-2ed2d.firebaseio.com",
+    "project_id": "journal-2ed2d",
+    "storage_bucket": "journal-2ed2d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:358070856390:android:d717da3109022ef43985c7",
+        "android_client_info": {
+          "package_name": "com.zafnib.journal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "358070856390-k2d1ut3245fmu0g8bgq25dom0m8foe29.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD21BiwPBjOKK_aFHmEkuEbgcAK4Fm558s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "358070856390-k2d1ut3245fmu0g8bgq25dom0m8foe29.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
