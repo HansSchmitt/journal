@@ -16,6 +16,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //We initialize an Authentication object. We inject the _authentication object into the AuthenticationBloc
+    //_authentication creates a FirebaseAuth instance, and has methods available for signing in, out, or verifying login credentials
+    //The _authenticationBloc class receives the _authentication service and starts
+    //streams and sinks that will handle authentication and logging out of the authentication backend.
     final Authentication _authentication = Authentication();
     final AuthenticationBloc _authenticationBloc = AuthenticationBloc(_authentication);
 
@@ -23,7 +26,7 @@ class MyApp extends StatelessWidget {
       authenticationBloc: _authenticationBloc,
       child: StreamBuilder(
         initialData: null,
-        stream: _authenticationBloc.user,
+        stream: _authenticationBloc.user,//This is a stream that has information from the authentication service regarding the user uid
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if(snapshot.connectionState == ConnectionState.waiting) {
             return Container(

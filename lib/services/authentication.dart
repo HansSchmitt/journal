@@ -1,10 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:journal/services/authentication_api.dart';
 
-class Authentication implements AuthenticationApi{
+class Authentication implements AuthenticationApi {
+  //The Authentication class is a service class directly related to the use of Firebase as the authentication service.
+  //It implements the abstract AuthenticationApi class so that other classes can
+  //depend directly on the AuthenticationApi class(which has all methods needed from an authentication service)
+  //and then be injected with this Authentication class. This allows us to change our authentication
+  //provider by just changing this class and without having to change other code.
+
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
-  getFirebaseAuth() {
+  getAuth() {
     return _firebaseAuth;
   }
 
@@ -17,14 +23,17 @@ class Authentication implements AuthenticationApi{
     _firebaseAuth.signOut();
   }
 
-  Future<String> signInWithEmailAndPassword({String email, String password}) async {
+  Future<String> signInWithEmailAndPassword(
+      {String email, String password}) async {
     _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
     FirebaseUser user = await _firebaseAuth.currentUser();
     return user.uid;
   }
 
-  Future<String> createUserWithEmailAndPassword({String email, String password}) async {
-    _firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
+  Future<String> createUserWithEmailAndPassword(
+      {String email, String password}) async {
+    _firebaseAuth.createUserWithEmailAndPassword(
+        email: email, password: password);
     FirebaseUser user = await _firebaseAuth.currentUser();
     return user.uid;
   }
@@ -38,5 +47,4 @@ class Authentication implements AuthenticationApi{
     FirebaseUser user = await _firebaseAuth.currentUser();
     return user.isEmailVerified;
   }
-
 }

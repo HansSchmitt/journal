@@ -30,6 +30,7 @@ class LoginBloc with Validators {
   Sink<String> get loginOrCreateChanged => _loginOrCreateController.sink;
   Stream<String> get loginOrCreate => _loginOrCreateController.stream;
 
+  //Use dependency injection to inject the Abstract class AuthenticationApi with the Firebase authentication class Authetnication
   LoginBloc(this.authenticationApi) {
     _startListenersIfEmailPasswordAreValid();
   }
@@ -103,7 +104,9 @@ class LoginBloc with Validators {
             _result = "Created user: $user";
             authenticationApi
                 .signInWithEmailAndPassword(email: _email, password: _password)
-                .then((user) {})
+                .then((user) {
+                  _result = 'Success';
+                })
                 .catchError((error) async {
                   print('Login error: $error');
                   _result = error;

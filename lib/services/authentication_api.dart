@@ -1,6 +1,7 @@
+//An abstract class that details all of the methods required of an authentication service class for this app.
 
 abstract class AuthenticationApi {
-  getFirebaseAuth();
+  getAuth();
   Future<String> currentUserUid();
   Future<void> signOut();
   Future<String> signInWithEmailAndPassword({String email, String password});

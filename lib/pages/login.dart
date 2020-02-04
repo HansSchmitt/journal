@@ -27,7 +27,7 @@ class _LoginState extends State<Login> {
     return Scaffold(
       appBar: AppBar(
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(60.0),
+          preferredSize: Size.fromHeight(88.0),
           child: Icon(
             Icons.account_circle,
             size: 88.0,
