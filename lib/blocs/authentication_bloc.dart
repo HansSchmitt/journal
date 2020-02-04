@@ -3,6 +3,7 @@ import '../services/authentication_api.dart';
 
 class AuthenticationBloc {
   final AuthenticationApi authenticationApi;
+
   final StreamController<String> _authenticationController = StreamController<String>();
   Sink<String> get addUser => _authenticationController.sink;
   Stream<String> get user => _authenticationController.stream;
