@@ -21,8 +21,8 @@ class _HomeState extends State<Home> {
   AuthenticationBloc _authenticationBloc;
   HomeBloc _homeBloc;
   String _uid;
-  MoodIcons _moodIcons;
-  FormatDates _formatDates;
+  MoodIcons _moodIcons = MoodIcons();
+  final FormatDates _formatDates = FormatDates();
 
   @override
   void didChangeDependencies() {

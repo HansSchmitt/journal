@@ -28,23 +28,33 @@ class MyApp extends StatelessWidget {
         initialData: null,
         stream: _authenticationBloc.user,//This is a stream that has information from the authentication service regarding the user uid
         builder: (BuildContext context, AsyncSnapshot snapshot) {
+          //We check if we are still waiting for data, if so we display a CircularProgressIndicator
+          //so that the user knows the app is still loading.
           if(snapshot.connectionState == ConnectionState.waiting) {
             return Container(
               color: Colors.lightGreen,
               child: CircularProgressIndicator(),
             );
-          } else if (snapshot.data == true) {
+          }
+          //We check if the data returned is true(verified by the authentication service)
+          //Then we forward the user to the home page
+          else if (snapshot.hasData) {
             return HomeBlocProvider(
               homeBloc: HomeBloc(DbFirestoreService(),_authentication),
+              uid: snapshot.data,
               child: _buildMaterialApp(Home()),
             );
-          } else {
+          }
+          //If we have not received authentication from the backend, we forward the user to the Login page
+          else {
             return _buildMaterialApp(Login());
           }
         },
       ),
     );
   }
+
+  //TODO implement methods to create cupertino apps instead of material apps for iOS
 
   MaterialApp _buildMaterialApp(Widget homePage) {
     return MaterialApp(

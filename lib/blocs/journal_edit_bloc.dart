@@ -1,6 +1,6 @@
 import 'dart:async';
 import '../models/journal.dart';
-import '../services/db_firestore_api.dart';
+import '../services/db_api.dart';
 
 class JournalEditBloc {
   final DbApi dbAPI;

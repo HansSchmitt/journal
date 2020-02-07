@@ -52,7 +52,6 @@ class LoginBloc with Validators {
       _email = '';
       _emailValid = false;
       _updateEnableLoginCreateButtonStream();
-
     });
 
     password.listen((password) {

@@ -3,7 +3,10 @@ import 'package:intl/intl.dart';
 class FormatDates {
 
   String dateFormatShortMDY(String date) {
-    return DateFormat.yMMMd().format(DateTime.parse(date));
+    if (date != null) {
+      return DateFormat.yMMMd().format(DateTime.parse(date));
+    }
+    return null;
   }
 
   String dateFormatDayNumber(String date) {

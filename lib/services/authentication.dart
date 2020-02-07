@@ -16,22 +16,20 @@ class Authentication implements AuthenticationApi {
 
   Future<String> currentUserUid() async {
     FirebaseUser user = await _firebaseAuth.currentUser();
-    return user.uid;
+    return user != null ? user.uid : null;
   }
 
   Future<void> signOut() async {
     _firebaseAuth.signOut();
   }
 
-  Future<String> signInWithEmailAndPassword(
-      {String email, String password}) async {
+  Future<String> signInWithEmailAndPassword({String email, String password}) async {
     _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
     FirebaseUser user = await _firebaseAuth.currentUser();
     return user.uid;
   }
 
-  Future<String> createUserWithEmailAndPassword(
-      {String email, String password}) async {
+  Future<String> createUserWithEmailAndPassword({String email, String password}) async {
     _firebaseAuth.createUserWithEmailAndPassword(
         email: email, password: password);
     FirebaseUser user = await _firebaseAuth.currentUser();

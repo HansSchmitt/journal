@@ -56,7 +56,7 @@ class _LoginState extends State<Login> {
               StreamBuilder(
                 stream: _loginBloc.password,
                 builder: (BuildContext context, AsyncSnapshot snapshot) => TextField(
-                  keyboardType: TextInputType.visiblePassword,
+                  //keyboardType: TextInputType.visiblePassword,
                   obscureText: true,
                   decoration: InputDecoration(
                     labelText: 'Password',
@@ -68,6 +68,7 @@ class _LoginState extends State<Login> {
               ),
               SizedBox(height: 48.0,),
               _buildLoginAndCreateButtons(),
+              //_buildButtons();
             ],
           ),
         ),
@@ -85,7 +86,7 @@ class _LoginState extends State<Login> {
         } else if (snapshot.data == 'Create Account') {
           return _buttonsCreateAccount();
         } else {
-          return null;//Do I need this?
+          return null;
         }
       },
     );

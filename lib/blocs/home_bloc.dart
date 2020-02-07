@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:journal/services/authentication_api.dart';
-import '../services/db_firestore_api.dart';
+import '../services/db_api.dart';
 import '../models/journal.dart';
 
 class HomeBloc {
@@ -25,10 +25,17 @@ class HomeBloc {
 
   void _startListeners() {
     //Retrieve Firestore Journal Records as List<Journal> not DocumentSnapshot
-    String _userUID;
-    authenticationApi.getAuth().currentUser().then((user) => _userUID = user.uid);
-    dbApi.getJournalList(_userUID).listen((journalDocs) => _addListJournal.add(journalDocs));
-    _journalDeleteController.stream.listen((journal) => dbApi.deleteJournal(journal));
+
+    authenticationApi.getAuth().currentUser().then((user) {
+      dbApi.getJournalList(user.uid).listen((journalDocs) {
+        _addListJournal.add(journalDocs);
+      });
+
+      _journalDeleteController.stream.listen((journal) => dbApi.deleteJournal(journal));
+    });
+
+
+
     
   }
 

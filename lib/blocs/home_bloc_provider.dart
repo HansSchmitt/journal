@@ -10,7 +10,7 @@ class HomeBlocProvider extends InheritedWidget {
       : super(key: key, child: child);
 
   static HomeBlocProvider of(BuildContext context) {
-    return (context.dependOnInheritedWidgetOfExactType() as HomeBlocProvider);
+    return (context.dependOnInheritedWidgetOfExactType<HomeBlocProvider>());
   }
 
 

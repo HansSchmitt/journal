@@ -6,7 +6,13 @@ class Journal {
   String uid;
   String documentID;
 
-  Journal({this.mood, this.date, this.note, this.documentID, this.uid});
+  Journal({
+    this.mood,
+    this.date,
+    this.note,
+    this.documentID,
+    this.uid
+  });
 
   factory Journal.fromDoc(dynamic doc) => Journal(
     documentID: doc.documentID,

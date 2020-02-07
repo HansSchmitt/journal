@@ -1,11 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:journal/models/journal.dart';
-import 'db_firestore_api.dart';
+import 'db_api.dart';
 
 class DbFirestoreService implements DbApi {
   Firestore _firestore = Firestore.instance;
+  //The name of the collection in our database
   String _collectionJournals = 'journals';
 
+  //Sets the firestore instance to transmit time info on each snapshot
   DbFirestoreService() {
     _firestore.settings(timestampsInSnapshotsEnabled: true);
   }
@@ -24,7 +26,13 @@ class DbFirestoreService implements DbApi {
   }
 
   Future<Journal> getJournal(String documentID) async {
-
+    return _firestore
+        .collection(_collectionJournals)
+        .document(documentID)
+        .get()
+        .then((documentSnapshot) {
+      return Journal.fromDoc(documentSnapshot);
+    });
   }
 
   Future<bool> addJournal(Journal journal) async {
@@ -51,7 +59,17 @@ class DbFirestoreService implements DbApi {
   }
 
   void updateJournalWithTransaction(Journal journal) {
-
+    DocumentReference _documentReference = _firestore.collection(_collectionJournals).document(journal.documentID);
+    var journalData = {
+      'date': journal.date,
+      'mood': journal.mood,
+      'note': journal.note,
+    };
+    _firestore.runTransaction((transaction) async {
+      await transaction
+          .update(_documentReference, journalData)
+          .catchError((error) => print('Error updating: $error'));
+    });
   }
 
   void deleteJournal(Journal journal) async {
