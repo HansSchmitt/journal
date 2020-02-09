@@ -7,14 +7,16 @@ class HomeBloc {
   final DbApi dbApi;
   final AuthenticationApi authenticationApi;
 
-  final StreamController<List<Journal>> _journalController = StreamController<List<Journal>>.broadcast();
+  final StreamController<List<Journal>> _journalController =
+      StreamController<List<Journal>>.broadcast();
   Sink<List<Journal>> get _addListJournal => _journalController.sink;
   Stream<List<Journal>> get listJournal => _journalController.stream;
 
-  final StreamController<Journal> _journalDeleteController = StreamController<Journal>.broadcast();
+  final StreamController<Journal> _journalDeleteController =
+      StreamController<Journal>.broadcast();
   Sink<Journal> get deleteJournal => _journalDeleteController.sink;
 
-  HomeBloc(this.dbApi, this.authenticationApi){
+  HomeBloc(this.dbApi, this.authenticationApi) {
     _startListeners();
   }
 
@@ -31,14 +33,8 @@ class HomeBloc {
         _addListJournal.add(journalDocs);
       });
 
-      _journalDeleteController.stream.listen((journal) => dbApi.deleteJournal(journal));
+      _journalDeleteController.stream
+          .listen((journal) => dbApi.deleteJournal(journal));
     });
-
-
-
-    
   }
-
-
-
 }

@@ -3,7 +3,8 @@ import 'dart:async';
 class Validators {
   final validateEmail =
       StreamTransformer<String, String>.fromHandlers(handleData: (email, sink){
-        if (email.contains('@') && email.contains('.')) {
+        final validCharacters = RegExp(r'^[a-zA-Z0-9_\-=@\.!#$%&*+/?^`{|}~]+$');
+        if (validCharacters.hasMatch(email)) {
           sink.add(email);
         } else if (email.length <= 0) {
           sink.addError('Enter a valid email');
